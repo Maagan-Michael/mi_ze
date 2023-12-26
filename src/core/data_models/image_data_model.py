@@ -1,6 +1,10 @@
 
+from typing import List
+from core.data_models.face_data_model import FaceDataModel
+
+
 class ImageDataModel:
-    def __init__(self, image_id, image_path,faces = None, metadata=None):
+    def __init__(self, image_id, image_path, faces: List[FaceDataModel] = None, metadata=None):
         self.image_id = image_id
         self.image_path = image_path
         self.metadata = metadata or {}
@@ -18,7 +22,7 @@ class ImageDataModel:
     def get_metadata(self):
         return self.metadata
     
-    def add_face(self,face):
+    def add_face(self,face:FaceDataModel):
         self.faces.append(face)
 
     def update_face(self, face_id, new_face):
