@@ -7,6 +7,7 @@ from core.process_image_faces import process_image_faces
 def process_images(images: List[ImageDataModel], neural_net_model):
     images_with_faces = []
     for image in images:
+        print(image.image_id)
         faces = process_image_faces(imageData=image, neural_net_model=neural_net_model)
         for face in faces:
             image.add_face(face)

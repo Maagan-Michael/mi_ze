@@ -14,8 +14,8 @@ def images_from_csv():
             image_id = row[0]
             image_path = row[1]
             metadata = row[2]
-            faces = [face for face in faces if face.imageId == image_id]
-            image = ImageDataModel(image_id=image_id, image_path=image_path, metadata=metadata,faces=faces)
+            image_faces = [face for face in faces if face.imageId == image_id]
+            image = ImageDataModel(image_id=image_id, image_path=image_path, metadata=metadata,faces=image_faces)
             images.append(image)
 
     return images

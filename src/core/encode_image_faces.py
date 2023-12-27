@@ -7,7 +7,7 @@ def encode_image_faces(image:ImageDataModel):
         face_image_path = face.get_face_image_path()
         face_encoding = encode_face(face_image_path)
         if face_encoding is not None:
-            print("Face encoding:")
+            print("Face encoding sucessful for:", face.faceId)
             face.update_face_encoding(face_encoding)
         else:
             print("No face found in the image.")
