@@ -30,3 +30,5 @@ class ImageDataModel:
             if face.get_face_id() == face_id:
                 self.faces[i] = new_face
                 break
+
+    

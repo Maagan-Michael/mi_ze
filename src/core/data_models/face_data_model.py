@@ -1,11 +1,11 @@
 class FaceDataModel:
-    def __init__(self,imageId, faceId, faceImagePath, personId, box):
+    def __init__(self,imageId, faceId, faceImagePath, personId, box, face_encoding = None):
         self.faceId = faceId
         self.faceImagePath = faceImagePath
         self.personId = personId
         self.box = box
         self.imageId = imageId
-        self.face_encoding = None
+        self.face_encoding = face_encoding
 
     def get_face_id(self):
         return self.faceId
