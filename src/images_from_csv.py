@@ -29,7 +29,7 @@ def faces_from_csv():
             face_id = row[0]
             image_id = row[1]
             face_image_path = row[2]
-            face_box = row[3]
+            face_box = np.fromstring(row[3][1:-1], sep=' ')
             face_encoding = np.fromstring(row[4][1:-1], sep=' ')
             person_id = row[5]
             face = FaceDataModel(faceId=face_id,imageId=image_id, faceImagePath=face_image_path, box=face_box,
