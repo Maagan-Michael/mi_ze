@@ -1,8 +1,10 @@
 import csv
 
 import numpy as np
-from core.data_models.face_data_model import FaceDataModel
-from core.data_models.image_data_model import ImageDataModel
+from data_models.face_data_model import FaceDataModel
+
+from data_models.image_data_model import ImageDataModel
+
 
 
 def images_from_csv():

@@ -1,12 +1,15 @@
 import csv
 from typing import List
-from core.data_models.face_data_model import FaceDataModel
 
-from core.data_models.person_data_model import PersonDataModel
+from data_models.face_data_model import FaceDataModel
+from data_models.images_from_csv import faces_from_csv
+from data_models.person_data_model import PersonDataModel
 
 
-def persons_from_csv(faces: List[FaceDataModel]):
+
+def persons_from_csv():
     persons_list = []
+    faces: List[FaceDataModel] = faces_from_csv()
     csv_file_name="persons.csv"
     try:
         # Open the CSV file in read mode
