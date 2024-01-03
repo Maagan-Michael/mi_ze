@@ -1,6 +1,7 @@
 
 from typing import List
-from core.data_models.face_data_model import FaceDataModel
+
+from data_models.face_data_model import FaceDataModel
 
 
 class ImageDataModel:

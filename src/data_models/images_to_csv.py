@@ -15,6 +15,7 @@ BOX_INDEX = 3
 FACE_ENCODING_INDEX = 4
 PERSON_ID_INDEX = 5
 
+
 def add_image_to_csv(image: ImageDataModel):
     image_id = image.get_image_id()
     image_path = image.get_image_path()
@@ -33,7 +34,7 @@ def add_image_to_csv(image: ImageDataModel):
         writer = csv.writer(csvfile)
         # Write the faces data to the faces.csv file
         for face in faces:
-            writer.writerow([ face.faceId,face.imageId,  face.faceImagePath, face.box, face.face_encoding, face.personId])
+            writer.writerow([ face.faceId,face.imageId,  face.faceImagePath, face.box, face.face_encoding, face.personId, face.certainty, face.is_verified])
 
 
 def add_images_to_csv(images):
@@ -67,6 +68,7 @@ def update_image(image_id, image:ImageDataModel):
         face_indices = [i for i, row in enumerate(rows) if row[FACE_IMAGE_ID_INDEX] == image_id]
         # delete the rows at the given indices
         for index in sorted(face_indices, reverse=True):
+            print(index)
             del rows[index]
     
     
@@ -74,5 +76,6 @@ def update_image(image_id, image:ImageDataModel):
     with open('faces.csv', 'w', newline='') as csvfile:
         writer = csv.writer(csvfile)
         for face in image.faces:
-            writer.writerow([ face.faceId,face.imageId,  face.faceImagePath, face.box, face.face_encoding, face.personId])
+            print(face.faceId)
+            writer.writerow([ face.faceId,face.imageId,  face.faceImagePath, face.box, face.face_encoding, face.personId,face.certainty, face.is_verified])
     

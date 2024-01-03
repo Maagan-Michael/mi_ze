@@ -2,9 +2,9 @@ from typing import List
 from deepface import DeepFace
 import numpy as np
 from core.cut_picture_from_box import cut_picture_from_box
-from core.data_models.face_data_model import FaceDataModel
+from data_models.face_data_model import FaceDataModel
+from data_models.image_data_model import ImageDataModel
 
-from core.data_models.image_data_model import ImageDataModel
 
 
 def process_images(images: List[ImageDataModel]):

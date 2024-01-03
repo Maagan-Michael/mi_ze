@@ -2,6 +2,7 @@ import csv
 
 import numpy as np
 from data_models.face_data_model import FaceDataModel
+from data_models.faces_from_csv import faces_from_csv
 
 from data_models.image_data_model import ImageDataModel
 
@@ -23,18 +24,3 @@ def images_from_csv():
     return images
 
 
-def faces_from_csv():
-    faces = []
-    with open('faces.csv', newline='') as csvfile:
-        reader = csv.reader(csvfile)
-        for row in reader:
-            face_id = row[0]
-            image_id = row[1]
-            face_image_path = row[2]
-            face_box = np.fromstring(row[3][1:-1], sep=' ')
-            face_encoding = np.fromstring(row[4][1:-1], sep=' ')
-            person_id = row[5]
-            face = FaceDataModel(faceId=face_id,imageId=image_id, faceImagePath=face_image_path, box=face_box,
-                                 face_encoding=face_encoding, personId=person_id)
-            faces.append(face)
-    return faces

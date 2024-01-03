@@ -1,6 +1,7 @@
 from typing import List
 
-from core.data_models.image_data_model import ImageDataModel
+from data_models.image_data_model import ImageDataModel
+
 
 
 def get_faces_from_image_data_model(images: List[ImageDataModel]):

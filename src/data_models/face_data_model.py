@@ -1,5 +1,5 @@
 class FaceDataModel:
-    def __init__(self,imageId, faceId, faceImagePath, personId, box, certainty = 0.0, face_encoding = None):
+    def __init__(self,imageId, faceId, faceImagePath, personId, box, certainty = 0.0, face_encoding = None, is_verified = False):
         self.faceId = faceId
         self.faceImagePath = faceImagePath
         self.personId = personId
@@ -7,6 +7,8 @@ class FaceDataModel:
         self.imageId = imageId
         self.face_encoding = face_encoding
         self.certainty = certainty
+        self.is_verified = is_verified
+        
 
     def get_face_id(self):
         return self.faceId
@@ -25,3 +27,9 @@ class FaceDataModel:
     
     def update_face_encoding(self, face_encoding):
         self.face_encoding = face_encoding
+    
+    def update_certainty(self, certainty):
+        self.certainty = certainty
+
+    def update_verified(self, verified):
+        self.is_verified = verified
