@@ -10,7 +10,7 @@ from data_models.person_data_model import PersonDataModel
 def persons_from_csv():
     persons_list = []
     faces: List[FaceDataModel] = faces_from_csv()
-    csv_file_name="persons.csv"
+    csv_file_name="../persons.csv"
     # Open the CSV file in read mode
     with open(csv_file_name, mode='r') as csv_file:
         # Create a CSV reader

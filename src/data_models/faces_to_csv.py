@@ -12,7 +12,7 @@ IS_VERIFIED_INDEX = 7
 
 def update_face(face_id, face: FaceDataModel):
     # Define the CSV file name
-    csv_file_name = "faces.csv"
+    csv_file_name = "../faces.csv"
 
     # Read the existing data from the CSV file
     with open(csv_file_name, mode='r') as csv_file:

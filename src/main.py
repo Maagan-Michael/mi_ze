@@ -12,28 +12,108 @@ from data_models.images_from_csv import images_from_csv
 from data_models.person_data_model import PersonDataModel
 from data_models.persons_from_csv import persons_from_csv
 from repository import Repository
+from fastapi import FastAPI
+from typing import List
+from data_models.face_data_model import FaceDataModel
+from data_models.person_data_model import PersonDataModel
+from repository import Repository
 
 
+
+
+app = FastAPI()
 repository = Repository()
 
+@app.get("/")
+def read_root():
+    return {"mi": "ze"}
 
-processed_images = repository.get_images()
-people = repository.get_persons()
-faces:List[FaceDataModel] = repository.get_faces()
+@app.get("/images")
+def get_images():
+    images = repository.get_images()
+    json_images = [image.to_json() for image in images]
+    return json_images
+
+@app.post("/images")
+def add_images(images):
+    return repository.add_images(images)
+
+@app.put("/images/{image_id}")
+def update_image(image_id, image):
+    return repository.update_image(image_id, image)
+
+@app.get("/faces")
+def get_faces():
+    return repository.get_faces()
+
+@app.get("/persons")
+def get_persons():
+    return repository.get_persons()
+
+@app.get("/persons/{person_id}")
+def get_person(person_id):
+    return repository.get_person(person_id)
+
+@app.post("/persons")
+def add_persons(persons_list):
+    return repository.add_persons(persons_list)
+
+@app.put("/persons/{person_id}")
+def update_person(person_id, person):
+    return repository.update_person(person_id, person)
+
+@app.post("/persons/{person_id}/verified_faces")
+def add_verified_faces_to_person(person_id, faces):
+    person = repository.get_person(person_id)
+    return repository.add_verified_faces_to_person(person, faces)
+
+@app.delete("/persons/{person_id}/verified_faces")
+def remove_verified_faces(person_id, faces):
+    person = repository.get_person(person_id)
+    return repository.remove_verified_faces(person, faces)
+
+@app.put("/faces/{face_id}")
+def update_face(face_id, face):
+    return repository.update_face(face_id, face)
 
 
 
 
-for image in processed_images:
-    image = face_predictions_on_image(image=image, persons=people)
-    show_image_with_faces(image=image)
-    for face in image.faces:
-        if face.certainty > 0.4:
-            repository.update_face(face_id=face.faceId, face=face)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# processed_images = repository.get_images()
+# people = repository.get_persons()
+# faces:List[FaceDataModel] = repository.get_faces()
+
+
+
+
+# for image in processed_images:
+#     image = face_predictions_on_image(image=image, persons=people)
+#     show_image_with_faces(image=image)
+#     for face in image.faces:
+#         if face.certainty > 0.4:
+#             repository.update_face(face_id=face.faceId, face=face)
    
         
-           
-
+        
 
 
 

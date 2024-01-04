@@ -5,7 +5,7 @@ from data_models.face_data_model import FaceDataModel
 
 def faces_from_csv():
     faces = []
-    with open('faces.csv', newline='') as csvfile:
+    with open('../faces.csv', newline='') as csvfile:
         reader = csv.reader(csvfile)
         for row in reader:
             face_id = row[0]

@@ -11,7 +11,7 @@ from data_models.image_data_model import ImageDataModel
 def images_from_csv():
     faces = faces_from_csv()
     images = []
-    with open('images.csv', newline='') as csvfile:
+    with open('../images.csv', newline='') as csvfile:
         reader = csv.reader(csvfile)
         for row in reader:
             image_id = row[0]
