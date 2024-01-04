@@ -16,6 +16,31 @@ from repository import Repository
 
 repository = Repository()
 
+
+processed_images = repository.get_images()
+people = repository.get_persons()
+faces:List[FaceDataModel] = repository.get_faces()
+
+
+
+
+for image in processed_images:
+    image = face_predictions_on_image(image=image, persons=people)
+    show_image_with_faces(image=image)
+    for face in image.faces:
+        if face.certainty > 0.4:
+            repository.update_face(face_id=face.faceId, face=face)
+   
+        
+           
+
+
+
+
+
+
+#dummy data
+            
 # images = [ImageDataModel( image_path=r'images\test3.jpg',image_id="test3"),ImageDataModel( image_path=r'images\test_image.png',image_id="test"),ImageDataModel( image_path=r'images\test4.jpg',image_id="test4"),ImageDataModel( image_path=r'images\test_image2.jpeg',image_id="test2"), ImageDataModel( image_path=r'images\test5.jpg',image_id="test5"), ImageDataModel( image_path=r'images\test6.jpg',image_id="test6"), ImageDataModel( image_path=r'images\test7.jpg',image_id="test7"), ImageDataModel( image_path=r'images\test8.jpg',image_id="test8"), ImageDataModel( image_path=r'images\test9.jpg',image_id="test9"), ImageDataModel( image_path=r'images\test10.jpg',image_id="test10"), ImageDataModel( image_path=r'images\test11.jpg',image_id="test11"), ImageDataModel( image_path=r'images\test12.jpg',image_id="test12"), ImageDataModel( image_path=r'images\test13.jpg',image_id="test13"), ImageDataModel( image_path=r'images\test14.jpg',image_id="test14"), ImageDataModel( image_path=r'images\test15.jpg',image_id="test15"), ImageDataModel( image_path=r'images\test16.jpg',image_id="test16"), ImageDataModel( image_path=r'images\test17.jpg',image_id="test17"), ImageDataModel( image_path=r'images\test18.jpg',image_id="test18"), ImageDataModel( image_path=r'images\test19.jpg',image_id="test19"), ImageDataModel( image_path=r'images\test20.jpg',image_id="test20"), ImageDataModel( image_path=r'images\test21.jpg',image_id="test21"), ImageDataModel( image_path=r'images\test22.jpg',image_id="test22"), ImageDataModel( image_path=r'images\test23.jpg',image_id="test23"), ]
 # processed_images = repository.add_images(images=images)
 # people = [ PersonDataModel(name='Kami Tazyig',personId="2"), PersonDataModel(name='Omri Berchman',personId="1"),PersonDataModel(name='Yaron Shaharabani',personId="3"), PersonDataModel(name='Amit Inbar',personId="4")]
@@ -31,18 +56,3 @@ repository = Repository()
 # repository.add_verified_faces_to_person(person=people[1], faces=omri_faces)
 # repository.add_verified_faces_to_person(person=people[2], faces=yaron_faces)
 # repository.add_verified_faces_to_person(person=people[3], faces=amit_faces)
-
-processed_images = repository.get_images()
-people = repository.get_persons()
-faces = repository.get_faces()
-print(len(people[3].verified_faces))
-# Load the unknown face encoding
-for image in processed_images:
-    image = face_predictions_on_image(image=image, persons=people)
-    show_image_with_faces(image=image)
-    for face in image.faces:
-        if face.certainty > 0.55:
-            repository.update_face(face_id=face.faceId, face=face)
-   
-        
-           

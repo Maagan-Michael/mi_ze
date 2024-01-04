@@ -26,7 +26,7 @@ def persons_from_csv():
         for row in csv_reader:
             personId = row[personId_index]
             name = row[name_index]
-            verified_faces = [face for face in faces if str(face.personId) == str(personId)]
+            verified_faces = [face for face in faces if str(face.personId) == str(personId) and( face.certainty > 0.6 or face.is_verified) ]
             person_instance = PersonDataModel(personId, name, verified_faces)
             persons_list.append(person_instance)
 
