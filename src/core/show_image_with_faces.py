@@ -1,16 +1,16 @@
 import cv2
 
-from data_models.image_data_model import ImageDataModel
-from repository import Repository
+from src.data_models.image_data_model import ImageDataModel
+from src.repository import Repository
 
 
 def show_image_with_faces(image:ImageDataModel):
     repository = Repository()
     srcimg = cv2.imread(image.get_image_path())
     for face in image.faces:
-        x, y, w, h = face.box
+        x, y, w, h = face.box["x"], face.box["y"], face.box["w"], face.box["h"]
         face_id = face.get_face_id() # Get the face ID
-        person = repository.get_person(person_id=face.personId)
+        person = repository.get_person(person_id=face.person_id)
         cv2.rectangle(srcimg, (int(x), int(y)), (int(x + w), int(y + h)), (0, 255, 0), 2)
 
         if face.certainty is not None and person is not None:

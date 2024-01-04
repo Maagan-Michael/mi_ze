@@ -1,6 +1,6 @@
 from typing import List
 
-from data_models.image_data_model import ImageDataModel
+from src.data_models.image_data_model import ImageDataModel
 
 
 

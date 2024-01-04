@@ -1,7 +1,6 @@
 import numpy as np
-from data_models.face_data_model import FaceDataModel
-
-from data_models.person_data_model import PersonDataModel
+from src.data_models.face_data_model import FaceDataModel
+from src.data_models.person_data_model import PersonDataModel
 from deepface.commons import functions, realtime, distance as dst
 
 def calculate_probability_of_face_to_person(person: PersonDataModel,face:FaceDataModel):

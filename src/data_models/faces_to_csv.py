@@ -1,5 +1,6 @@
 import csv
-from data_models.face_data_model import FaceDataModel
+import json
+from src.data_models.face_data_model import FaceDataModel
 
 FACE_ID_INDEX = 0
 FACE_IMAGE_ID_INDEX = 1
@@ -12,7 +13,7 @@ IS_VERIFIED_INDEX = 7
 
 def update_face(face_id, face: FaceDataModel):
     # Define the CSV file name
-    csv_file_name = "../faces.csv"
+    csv_file_name = "faces.csv"
 
     # Read the existing data from the CSV file
     with open(csv_file_name, mode='r') as csv_file:
@@ -24,7 +25,7 @@ def update_face(face_id, face: FaceDataModel):
     for i, row in enumerate(rows):
         if row[FACE_ID_INDEX] == face_id:
             # Update the row with the new data
-            rows[i] = [face.faceId, face.imageId, face.faceImagePath, face.box, face.face_encoding, face.personId, face.certainty, face.is_verified]
+            rows[i] = [face.face_id, face.image_id, face.face_image_path, json.dumps(face.box), face.face_encoding, face.person_id, face.certainty, face.is_verified]
 
   
     # Write the updated data back to the CSV file

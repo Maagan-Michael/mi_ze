@@ -1,13 +1,13 @@
 from typing import List
-from core.process_images import process_images
-from data_models.face_data_model import FaceDataModel
-from data_models.faces_from_csv import faces_from_csv
-from data_models.faces_to_csv import update_face
-from data_models.images_from_csv import  images_from_csv
-from data_models.images_to_csv import add_images_to_csv, update_image
-from data_models.person_data_model import PersonDataModel
-from data_models.persons_from_csv import persons_from_csv
-from data_models.persons_to_csv import add_persons_to_csv, update_person
+from src.core.process_images import process_images
+from src.data_models.face_data_model import FaceDataModel
+from src.data_models.faces_from_csv import faces_from_csv
+from src.data_models.faces_to_csv import update_face
+from src.data_models.images_from_csv import  images_from_csv
+from src.data_models.images_to_csv import add_images_to_csv, update_image
+from src.data_models.person_data_model import PersonDataModel
+from src.data_models.persons_from_csv import persons_from_csv
+from src.data_models.persons_to_csv import add_persons_to_csv, update_person
 
 
 class Repository:
@@ -46,7 +46,7 @@ class Repository:
     def get_person(self, person_id):
         persons = self.get_persons()
         for person in persons:
-            if person.personId == person_id:
+            if person.person_id == person_id:
                 return person
         return None
     
@@ -61,14 +61,14 @@ class Repository:
     def add_verified_faces_to_person(self, person: PersonDataModel, faces: List[FaceDataModel]):
         for face in faces:
             face.update_verified(True)
-            face.update_person_id(person.personId)
-            update_face(face_id= face.faceId, face=face)
+            face.update_person_id(person.person_id)
+            update_face(face_id= face.face_id, face=face)
         return (self.get_persons(), self.get_images())
 
     def remove_verified_faces(self, person: PersonDataModel, faces):
         for face in faces:
             person.verified_faces.remove(face)
-        update_person(person_id= person.personId, person=person )
+        update_person(person_id= person.person_id, person=person )
         return (self.get_persons(), self.get_images())
     
     def update_face(self, face_id, face):

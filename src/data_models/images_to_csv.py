@@ -1,8 +1,9 @@
 
 import csv
+import json
 import os
 
-from data_models.image_data_model import ImageDataModel
+from src.data_models.image_data_model import ImageDataModel
 
 IMAGE_ID_INDEX = 0
 IMAGE_PATH_INDEX = 1
@@ -34,7 +35,7 @@ def add_image_to_csv(image: ImageDataModel):
         writer = csv.writer(csvfile)
         # Write the faces data to the faces.csv file
         for face in faces:
-            writer.writerow([ face.faceId,face.imageId,  face.faceImagePath, face.box, face.face_encoding, face.personId, face.certainty, face.is_verified])
+            writer.writerow([ face.face_id,face.image_id,  face.face_image_path, json.dumps(face.box), face.face_encoding, face.person_id, face.certainty, face.is_verified])
 
 
 def add_images_to_csv(images):
@@ -76,6 +77,6 @@ def update_image(image_id, image:ImageDataModel):
     with open('faces.csv', 'w', newline='') as csvfile:
         writer = csv.writer(csvfile)
         for face in image.faces:
-            print(face.faceId)
-            writer.writerow([ face.faceId,face.imageId,  face.faceImagePath, face.box, face.face_encoding, face.personId,face.certainty, face.is_verified])
+            print(face.face_id)
+            writer.writerow([ face.face_id,face.image_id,  face.face_image_path, face.box, face.face_encoding, face.person_id,face.certainty, face.is_verified])
     

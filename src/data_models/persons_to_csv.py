@@ -1,6 +1,7 @@
 import csv
+import json
 
-from data_models.person_data_model import PersonDataModel
+from src.data_models.person_data_model import PersonDataModel
 
 
 FACE_ID_INDEX = 0
@@ -31,7 +32,7 @@ def add_persons_to_csv(persons_list):
         # Write the header row
         # Write each PersonDataModel instance to the CSV file
         for person in persons_list:
-            csv_writer.writerow([person.personId, person.name])
+            csv_writer.writerow([person.person_id, person.name])
 
     print(f"Data written to {csv_file_name}")
 
@@ -49,7 +50,7 @@ def update_person(person_id, person: PersonDataModel):
     for i, row in enumerate(rows):
         if row[PERSON_ID_INDEX] == person_id:
             # Update the row with the new data
-            rows[i] = [person.personId, person.name]
+            rows[i] = [person.person_id, person.name]
 
     # Write the updated data back to the CSV file
     with open(csv_file_name, mode='w', newline='') as csv_file:
@@ -74,5 +75,5 @@ def update_person(person_id, person: PersonDataModel):
     with open('faces.csv', 'w', newline='') as csvfile:
         writer = csv.writer(csvfile)
         for face in person.verified_faces:
-            writer.writerow([ face.faceId,face.imageId,  face.faceImagePath, face.box, face.face_encoding, face.personId])
+            writer.writerow([ face.face_id,face.image_id,  face.face_image_path, json.dumps(face.box), face.face_encoding, face.person_id])
     

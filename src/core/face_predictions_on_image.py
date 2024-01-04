@@ -1,11 +1,11 @@
 from typing import List
 import cv2
 from deepface.commons import functions, realtime, distance as dst
-from core.calculate_probability_of_face_to_person import calculate_probability_of_face_to_person
-from data_models.face_data_model import FaceDataModel
-from data_models.image_data_model import ImageDataModel
-from data_models.person_data_model import PersonDataModel
-from data_models.persons_from_csv import persons_from_csv
+from src.core.calculate_probability_of_face_to_person import calculate_probability_of_face_to_person
+from src.data_models.face_data_model import FaceDataModel
+from src.data_models.image_data_model import ImageDataModel
+from src.data_models.person_data_model import PersonDataModel
+from src.data_models.persons_from_csv import persons_from_csv
 
 TRESHOLD = dst.findThreshold("Facenet512", "cosine") + 0.4
 
@@ -16,9 +16,6 @@ def face_predictions_on_image(image: ImageDataModel,persons: List[PersonDataMode
     
     d = {}
     for face in image.faces:
- 
-        
-        # Draw box on image
         if(len(face.face_encoding) <1):
             print("no face encoding")
             continue
@@ -35,9 +32,9 @@ def face_predictions_on_image(image: ImageDataModel,persons: List[PersonDataMode
             if results[i] <= most_similar_face and results[i] <= TRESHOLD:
                 verified_person_face = persons_faces[i][1]
                 person =  persons_faces[i][0]
-                if person.personId not in d or d[person.personId][2] > results[i]:
+                if person.person_id not in d or d[person.person_id][2] > results[i]:
                     probability = calculate_probability_of_face_to_person(person=person,face=face)
-                    d[person.personId] = (person,face,probability)
+                    d[person.person_id] = (person,face,probability)
     
 
 
@@ -51,12 +48,12 @@ def face_predictions_on_image(image: ImageDataModel,persons: List[PersonDataMode
         if match_probability < 0.4:
             continue
 
-        face.update_person_id(personId=person.personId)
+        face.update_person_id(person_id=person.person_id)
         face.update_certainty(match_probability)
 
 
         
-        image.update_face(face_id=face.faceId, new_face=face)
+        image.update_face(face_id=face.face_id, new_face=face)
 
 
 

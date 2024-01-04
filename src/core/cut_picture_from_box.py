@@ -10,7 +10,7 @@ def cut_picture_from_box(picture_path, box, output_dir,file_name):
 
     # Cut the picture based on the boxes
 
-    x, y, w, h = box
+    x, y, w, h = box["x"], box["y"], box["w"], box["h"]
     cut_picture = picture[int(y):int(y+h), int(x):int(x+w)]
 
     # Save the cut picture to the output directory
