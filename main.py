@@ -2,12 +2,10 @@
 import os
 from typing import Any, Dict, List
 import cv2
-from pydantic import BaseModel
 from src.core.exceptions.person_not_found_exception import PersonNotFoundException
 from src.core.get_faces_from_images import get_faces_from_image_data_model
 from src.core.process_images import process_images
 from src.core.show_image_with_faces import show_image_with_faces
-from src.data_models.face_data_model import FaceDataModel
 from src.data_models.image_data_model import ImageDataModel
 from src.data_models.images_from_csv import images_from_csv
 from src.data_models.person_data_model import PersonDataModel
@@ -21,9 +19,18 @@ from fastapi.responses import JSONResponse
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import JSONResponse
 from typing import List
+from fastapi.middleware.cors import CORSMiddleware
 
 
 app = FastAPI()
+# Enable CORS for all routes
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Set this to your actual frontend origin in production
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 repository = Repository()
 
 @app.get("/")
