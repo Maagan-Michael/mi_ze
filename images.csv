@@ -1,23 +1,46 @@
-test3,images\test3.jpg,{}
-test,images\test_image.png,{}
-test4,images\test4.jpg,{}
-test2,images\test_image2.jpeg,{}
-test5,images\test5.jpg,{}
-test6,images\test6.jpg,{}
-test7,images\test7.jpg,{}
-test8,images\test8.jpg,{}
-test9,images\test9.jpg,{}
-test10,images\test10.jpg,{}
-test11,images\test11.jpg,{}
-test12,images\test12.jpg,{}
-test13,images\test13.jpg,{}
-test14,images\test14.jpg,{}
-test15,images\test15.jpg,{}
-test16,images\test16.jpg,{}
-test17,images\test17.jpg,{}
-test18,images\test18.jpg,{}
-test19,images\test19.jpg,{}
-test20,images\test20.jpg,{}
-test21,images\test21.jpg,{}
-test22,images\test22.jpg,{}
-test23,images\test23.jpg,{}
+test3,images\test3.jpg,"{""original_height"": 899, ""original_width"": 1599}"
+test,images\test_image.png,"{""original_height"": 631, ""original_width"": 663}"
+test4,images\test4.jpg,"{""original_height"": 1200, ""original_width"": 1600}"
+test3,images\test3.jpg,"{""original_height"": 899, ""original_width"": 1599}"
+test2,images\test_image2.jpeg,"{""original_height"": 266, ""original_width"": 190}"
+test5,images\test5.jpg,"{""original_height"": 900, ""original_width"": 1600}"
+test,images\test_image.png,"{""original_height"": 631, ""original_width"": 663}"
+test6,images\test6.jpg,"{""original_height"": 1200, ""original_width"": 1600}"
+test4,images\test4.jpg,"{""original_height"": 1200, ""original_width"": 1600}"
+test7,images\test7.jpg,"{""original_height"": 1134, ""original_width"": 2016}"
+test2,images\test_image2.jpeg,"{""original_height"": 266, ""original_width"": 190}"
+test5,images\test5.jpg,"{""original_height"": 900, ""original_width"": 1600}"
+test8,images\test8.jpg,"{""original_height"": 900, ""original_width"": 1600}"
+test6,images\test6.jpg,"{""original_height"": 1200, ""original_width"": 1600}"
+test9,images\test9.jpg,"{""original_height"": 899, ""original_width"": 1599}"
+test10,images\test10.jpg,"{""original_height"": 900, ""original_width"": 1600}"
+test11,images\test11.jpg,"{""original_height"": 1134, ""original_width"": 2016}"
+test7,images\test7.jpg,"{""original_height"": 1134, ""original_width"": 2016}"
+test12,images\test12.jpg,"{""original_height"": 900, ""original_width"": 1600}"
+test8,images\test8.jpg,"{""original_height"": 900, ""original_width"": 1600}"
+test13,images\test13.jpg,"{""original_height"": 900, ""original_width"": 1600}"
+test14,images\test14.jpg,"{""original_height"": 900, ""original_width"": 1600}"
+test9,images\test9.jpg,"{""original_height"": 899, ""original_width"": 1599}"
+test10,images\test10.jpg,"{""original_height"": 900, ""original_width"": 1600}"
+test15,images\test15.jpg,"{""original_height"": 900, ""original_width"": 1600}"
+test11,images\test11.jpg,"{""original_height"": 1134, ""original_width"": 2016}"
+test12,images\test12.jpg,"{""original_height"": 900, ""original_width"": 1600}"
+test16,images\test16.jpg,"{""original_height"": 900, ""original_width"": 1600}"
+test13,images\test13.jpg,"{""original_height"": 900, ""original_width"": 1600}"
+test17,images\test17.jpg,"{""original_height"": 899, ""original_width"": 1599}"
+test14,images\test14.jpg,"{""original_height"": 900, ""original_width"": 1600}"
+test18,images\test18.jpg,"{""original_height"": 899, ""original_width"": 1599}"
+test15,images\test15.jpg,"{""original_height"": 900, ""original_width"": 1600}"
+test19,images\test19.jpg,"{""original_height"": 899, ""original_width"": 1599}"
+test20,images\test20.jpg,"{""original_height"": 899, ""original_width"": 1599}"
+test16,images\test16.jpg,"{""original_height"": 900, ""original_width"": 1600}"
+test17,images\test17.jpg,"{""original_height"": 899, ""original_width"": 1599}"
+test21,images\test21.jpg,"{""original_height"": 899, ""original_width"": 1599}"
+test18,images\test18.jpg,"{""original_height"": 899, ""original_width"": 1599}"
+test22,images\test22.jpg,"{""original_height"": 899, ""original_width"": 1599}"
+test23,images\test23.jpg,"{""original_height"": 899, ""original_width"": 1599}"
+test19,images\test19.jpg,"{""original_height"": 899, ""original_width"": 1599}"
+test20,images\test20.jpg,"{""original_height"": 899, ""original_width"": 1599}"
+test21,images\test21.jpg,"{""original_height"": 899, ""original_width"": 1599}"
+test22,images\test22.jpg,"{""original_height"": 899, ""original_width"": 1599}"
+test23,images\test23.jpg,"{""original_height"": 899, ""original_width"": 1599}"

@@ -2,6 +2,7 @@
 import csv
 import json
 import os
+from src.data_models.faces_to_csv import update_face_csv
 
 from src.data_models.image_data_model import ImageDataModel
 
@@ -27,7 +28,7 @@ def add_image_to_csv(image: ImageDataModel):
     with open('images.csv', 'a', newline='') as csvfile:
         writer = csv.writer(csvfile)
         # Write the image data to the images.csv file
-        writer.writerow([image_id, image_path, metadata])
+        writer.writerow([image_id, image_path, json.dumps(metadata)])
 
     
     # Add faces to faces.csv
@@ -52,7 +53,7 @@ def update_image(image_id, image:ImageDataModel):
         # Find the index of the image with the given image_id
         image_index = [row[IMAGE_ID_INDEX] for row in rows].index(image_id)
         # Update the row at the given index
-        rows[image_index] = [image_id, image.get_image_path(), image.get_metadata()]
+        rows[image_index] = [image_id, image.get_image_path(), json.dumps(image.metadata)]
 
     # Open the images.csv file in write mode
     with open('images.csv', 'w', newline='') as csvfile:
@@ -61,22 +62,5 @@ def update_image(image_id, image:ImageDataModel):
         writer.writerows(rows)
 
     # Open the faces.csv file in read mode
-    with open('faces.csv', 'r', newline='') as csvfile:
-        reader = csv.reader(csvfile)
-        # Create a list of all the rows in the CSV file
-        rows = list(reader)
-        # Find the indices of the rows with the given image_id
-        face_indices = [i for i, row in enumerate(rows) if row[FACE_IMAGE_ID_INDEX] == image_id]
-        # delete the rows at the given indices
-        for index in sorted(face_indices, reverse=True):
-            print(index)
-            del rows[index]
-    
-    
-    # Open the faces.csv file in write mode
-    with open('faces.csv', 'w', newline='') as csvfile:
-        writer = csv.writer(csvfile)
-        for face in image.faces:
-            print(face.face_id)
-            writer.writerow([ face.face_id,face.image_id,  face.face_image_path, face.box, face.face_encoding, face.person_id,face.certainty, face.is_verified])
-    
+    for face in image.faces:
+        update_face_csv(face_id= face.face_id, face=face)

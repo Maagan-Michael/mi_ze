@@ -1,8 +1,9 @@
 from typing import List
+from src.core.face_predictions_on_image import face_predictions_on_image
 from src.core.process_images import process_images
 from src.data_models.face_data_model import FaceDataModel
 from src.data_models.faces_from_csv import faces_from_csv
-from src.data_models.faces_to_csv import update_face
+from src.data_models.faces_to_csv import update_face_csv
 from src.data_models.images_from_csv import  images_from_csv
 from src.data_models.images_to_csv import add_images_to_csv, update_image
 from src.data_models.person_data_model import PersonDataModel
@@ -24,6 +25,13 @@ class Repository:
 
     def get_images(self):
         return images_from_csv()
+    
+    def get_image(self, image_id):
+        images = self.get_images()
+        for image in images:
+            if image.image_id == image_id:
+                return image
+        return None
     
     def get_faces(self):
         return faces_from_csv()
@@ -62,7 +70,7 @@ class Repository:
         for face in faces:
             face.update_verified(True)
             face.update_person_id(person.person_id)
-            update_face(face_id= face.face_id, face=face)
+            update_face_csv(face_id= face.face_id, face=face)
         return (self.get_persons(), self.get_images())
 
     def remove_verified_faces(self, person: PersonDataModel, faces):
@@ -72,7 +80,25 @@ class Repository:
         return (self.get_persons(), self.get_images())
     
     def update_face(self, face_id, face):
-        update_face(face_id= face_id, face=face)
+        update_face_csv(face_id= face_id, face=face)
         return (self.get_persons(), self.get_images())
     
 
+    def predict_image(self, image_id):
+        image = self.get_image(image_id=image_id)
+        people = self.get_persons()
+        image = face_predictions_on_image(image=image, persons=people)
+        for face in image.faces:
+            if face.certainty > 0.4:
+                update_face_csv(face_id=face.face_id, face=face)
+        return (self.get_persons(), self.get_images())
+    
+    def update_database(self):
+        images = self.get_images()
+        people = self.get_persons()
+        for image in images:
+            image = face_predictions_on_image(image=image, persons=people)
+            for face in image.faces:
+                if face.certainty > 0.4:
+                    update_face_csv(face_id=face.face_id, face=face)
+        return (self.get_persons(), self.get_images())

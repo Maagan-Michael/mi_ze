@@ -1,4 +1,5 @@
 from typing import List
+import cv2
 from deepface import DeepFace
 import numpy as np
 from src.core.cut_picture_from_box import cut_picture_from_box
@@ -12,7 +13,11 @@ def process_images(images: List[ImageDataModel]):
     
     for image in images:
         print(image.image_id)
+        src_image = cv2.imread(image.get_image_path())
         image_path = image.get_image_path()
+        image.metadata["original_height"] = src_image.shape[0]
+        image.metadata["original_width"] = src_image.shape[1]
+
         face_dicts =  DeepFace.represent(img_path=image_path, model_name="Facenet512",detector_backend="retinaface",enforce_detection=False)
         for i,d in enumerate(face_dicts):
             face_image_file_name = f"{image.get_image_id()}_face_{i}.jpg"

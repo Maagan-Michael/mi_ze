@@ -24,8 +24,7 @@ def add_persons_to_csv(persons_list):
     # Define the CSV file name
     csv_file_name = "persons.csv"
 
-    # Open the CSV file in write mode
-    with open(csv_file_name, mode='w', newline='') as csv_file:
+    with open(csv_file_name, mode='a', newline='') as csv_file:
         # Create a CSV writer
         csv_writer = csv.writer(csv_file)
 

@@ -11,7 +11,7 @@ PERSON_ID_INDEX = 5
 CERTAINTY_INDEX = 6
 IS_VERIFIED_INDEX = 7
 
-def update_face(face_id, face: FaceDataModel):
+def update_face_csv(face_id, face: FaceDataModel):
     # Define the CSV file name
     csv_file_name = "faces.csv"
 

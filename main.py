@@ -2,6 +2,7 @@
 import os
 from typing import Any, Dict, List
 import cv2
+from src.core.face_predictions_on_image import face_predictions_on_image
 from src.core.exceptions.person_not_found_exception import PersonNotFoundException
 from src.core.get_faces_from_images import get_faces_from_image_data_model
 from src.core.process_images import process_images
@@ -15,11 +16,12 @@ from src.data_models.face_data_model import FaceDataModel
 from src.data_models.person_data_model import PersonDataModel
 from fastapi import FastAPI
 from typing import List
-from fastapi.responses import JSONResponse
+from fastapi.responses import FileResponse, JSONResponse
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import JSONResponse
 from typing import List
 from fastapi.middleware.cors import CORSMiddleware
+import uuid
 
 
 app = FastAPI()
@@ -71,6 +73,8 @@ def get_person(person_id: str):
 
 @app.post("/persons")
 def add_persons(persons_list: List[PersonDataModel]):
+    for p in persons_list:
+        p.person_id = str(uuid.uuid4())
     repository.add_persons(persons_list)
     return {"message": "Persons created successfully"}
 
@@ -102,15 +106,25 @@ def update_face(face_id: str, face: FaceDataModel):
     repository.update_face(face_id, face)
     return {"message": "Face updated successfully"}
 
+@app.get("/images/media/{image_id}")
+def get_image(image_id: str):
+    image:ImageDataModel = repository.get_image(image_id)
+    return FileResponse(image.get_image_path())
 
 
 
+@app.post("/images/{image_id}/predict")
+def predict_on_image(image_id: str):
+    image:ImageDataModel = repository.get_image(image_id)
+    people = repository.get_persons()
+    repository.predict_image(image_id=image_id)
+    return repository.get_image(image_id=image_id)
 
 
-
-
-
-
+@app.post('/update-database')
+def update_database():
+    repository.update_database()
+    return {"message": "Database updated successfully"}
 
 
 
@@ -144,6 +158,8 @@ def update_face(face_id: str, face: FaceDataModel):
 
 
 
+# face = repository.get_faces()[0]
+# repository.update_face(face_id=face.face_id, face=face)
 
 
 #dummy data
