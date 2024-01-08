@@ -101,7 +101,7 @@ def remove_verified_faces(person_id: str, faces: List[FaceDataModel]):
     except PersonNotFoundException as e:
         raise HTTPException(status_code=404, detail=str(e))
 
-@app.put("/faces/{face_id}")
+@app.post("/faces/{face_id}")
 def update_face(face_id: str, face: FaceDataModel):
     repository.update_face(face_id, face)
     return {"message": "Face updated successfully"}
